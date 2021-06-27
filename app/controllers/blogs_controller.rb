@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  
+
   def new
     @blog = Blog.new
   end
@@ -17,6 +17,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
+    @comment = Comment.new
   end
 
   def destroy
@@ -24,12 +25,12 @@ class BlogsController < ApplicationController
     @blog.destroy
     redirect_to blogs_path
   end
-  
+
   private
-  
-  
+
+
   def blog_params
     params.require(:blog).permit(:title, :image, :body)
   end
-  
+
 end
