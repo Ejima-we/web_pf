@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row ml-5 mt-4">
+    <div class="col-2">
+      <%= attachment_image_tag @user, :profile_image, size: "50x50", fallback: "logo.jpeg" %>
+    </div>
+    <div class="col-10">
+      <h3 class="profile-name"><%= @user.name %></h3>
+      <% if @user.id == current_user.id %>
+        <%= link_to "プロフィール編集", edit_user_path(@user), class:"btn btn-outline-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render 'blogs/list', blogs: @blogs %>
+

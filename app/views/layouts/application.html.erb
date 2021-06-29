@@ -10,22 +10,62 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to '投稿フォーム', new_blog_path %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
-    
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-light" style="background-color: #e3f2fd">
+        <div class="container">
+          <div class="navbar-brand p-3">
+            <%= link_to blogs_path, class:"text-dark" do %>
+              <i class="fas fa-book"></i> Blogger's
+            <% end %>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item active">
+                  <%= link_to new_blog_path, class:"nav-link text-dark" do %>
+                    <i class="fas fa-pencil-alt"></i> 投稿フォーム
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to user_path(current_user.id), class:"nav-link text-dark" do %>
+                    <i class="far fa-address-book"></i> マイページ
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-dark" do %>
+                    <i class="fas fa-sign-out-alt"></i> ログアウト
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class:"nav-link text-dark" do %>
+                    <i class="fas fa-user-plus"></i> 新規登録
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class:"nav-link text-dark" do %>
+                    <i class="fas fa-sign-in-alt"></i> ログイン
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+    <footer class="pt-5 pb-4", style="background-color: #e3f2fd">
+      <div class="container">
+        <div class="row">
+            あなたの日々を語る場所...</br>
+            Blogger's
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
