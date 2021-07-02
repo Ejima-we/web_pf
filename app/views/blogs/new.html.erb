@@ -1,16 +1,29 @@
-<h1>画像投稿フォーム</h1>
-<% if @blog.errors.any? %>
-  <%= @blog.errors.count %>件のエラーが発生しました
-  <% @blog.errors.full_messages.each do |message| %>
-    <%= message %>
+<div class="container py-3">
+  <h1><i class="fas fa-pencil-alt"></i> 投稿フォーム</h1>
+  <% if @blog.errors.any? %>
+    <%= @blog.errors.count %>件のエラーが発生しました
+    <% @blog.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
   <% end %>
-<% end %>
-<%= form_with model: @blog, local:true do |f| %>
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>本文</h4>
-  <%= f.text_area :body%>
-  <%= f.submit '投稿' %>
-<% end %>
+  <%= form_with model: @blog, local:true do |f| %>
+    <table class="table table-borderless">
+      <tr>
+        <td>画像</td>
+        <td><%= f.attachment_field :image %></td>
+      </tr>
+      <tr>
+        <td>タイトル</td>
+        <td><%= f.text_field :title %></td>
+      </tr>
+      <tr>
+        <td>本文</td>
+        <td><%= f.text_area :body %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit '投稿' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>
